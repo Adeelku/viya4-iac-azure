@@ -6,8 +6,12 @@ variable "client_secret" {
   default = ""
 }
 
-variable "subscription_id" {}
-variable "tenant_id" {}
+variable "subscription_id" {
+  default = ""
+}
+variable "tenant_id" {
+  default = ""
+}
 
 variable "use_msi" {
   description = "Use Managed Identity for Authentication (Azure VMs only)"
@@ -128,7 +132,7 @@ variable "aks_network_plugin" {
 variable "aks_network_policy" {
   description = "Sets up network policy to be used with Azure CNI. Network policy allows us to control the traffic flow between pods. Currently supported values are calico and azure. Changing this forces a new resource to be created."
   type        = string
-  default     = "azure"
+  default     = "calico"
   #TODO: add validation
 }
 
@@ -622,7 +626,7 @@ variable "cluster_node_pool_mode" {
 variable "cluster_api_mode" {
   description = "Use Public or Private IP address for the cluster API endpoint"
   type        = string
-  default     = "public"
+  default     = "private"
 
   validation {
     condition     = contains(["public", "private"], lower(var.cluster_api_mode))
